@@ -102,7 +102,7 @@ const isVisible = (sectionId) => {
     
     <div class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
         <!-- Header/Navbar -->
-        <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-blue-500/20">
+        <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80   border-b border-blue-500/20">
             <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <img src="/images/auth-logo.png" alt="eadLEX" class="h-10 w-auto" />
@@ -327,13 +327,13 @@ const isVisible = (sectionId) => {
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
                             
                             <!-- Ícone flutuante -->
-                            <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
+                            <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
                                 <component :is="screenshot.icon" class="w-6 h-6 text-[#7AD988]" />
                             </div>
                         </div>
                         
                         <!-- Conteúdo do card -->
-                        <div class="p-6 bg-slate-800/80 backdrop-blur-sm">
+                        <div class="p-6 bg-slate-800/80  ">
                             <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
                                 {{ screenshot.title }}
                             </h3>

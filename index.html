@@ -311,7 +311,7 @@
 </head>
 <body class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
     <!-- Header/Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-blue-500/20">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80   border-b border-blue-500/20">
         <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <img src="/images/auth-logo.png" alt="eadLEX" class="h-10 w-auto" />
@@ -334,10 +334,19 @@
     </header>
 
     <!-- Hero Section -->
-    <section data-section-id="hero" class="pt-32 pb-20 px-4">
-        <div class="container mx-auto max-w-6xl">
+    <section data-section-id="hero" class="pt-32 pb-20 px-4 relative overflow-hidden">
+        <!-- Vídeo de Background -->
+        <div class="absolute inset-0 z-0">
+            <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                <source src="/videos/landing/background.mp4" type="video/mp4" />
+                <source src="/videos/landing/background.webm" type="video/webm" />
+            </video>
+            <!-- Overlay escuro sutil para melhorar legibilidade -->
+            <div class="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-900/60 to-slate-900/70"></div>
+        </div>
+        <div class="container mx-auto max-w-6xl relative z-10">
             <div class="text-center mb-16 hero-content">
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight hero-title">
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight hero-title drop-shadow-2xl" style="text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.6);">
                     A Plataforma Gamificada que 
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#7AD988] to-[#23C13A]">
                         Eleva sua Performance
@@ -345,7 +354,7 @@
                     <br />
                     em Concursos, Exame da OAB e Estudos Jurídicos Avançados
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-4xl mx-auto leading-relaxed">
+                <p class="text-xl md:text-2xl text-gray-100 mb-10 max-w-4xl mx-auto leading-relaxed drop-shadow-lg" style="text-shadow: 0 2px 15px rgba(0, 0, 0, 0.7), 0 1px 5px rgba(0, 0, 0, 0.5);">
                     Aprenda com professores de alta performance criados por Inteligência Artificial, receba explicações detalhadas, resolva questões, avance em níveis e desenvolva as competências exigidas nas provas mais desafiadoras do país.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -456,11 +465,11 @@
                             <div class="text-6xl text-[#7AD988]/30">📈</div>
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
+                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
                             <div class="text-xl text-[#7AD988]">📈</div>
                         </div>
                     </div>
-                    <div class="p-6 bg-slate-800/80 backdrop-blur-sm">
+                    <div class="p-6 bg-slate-800/80  ">
                         <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
                             Dashboard Gamificado
                         </h3>
@@ -479,11 +488,11 @@
                             <div class="text-6xl text-[#7AD988]/30">🎯</div>
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
+                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
                             <div class="text-xl text-[#7AD988]">🎯</div>
                         </div>
                     </div>
-                    <div class="p-6 bg-slate-800/80 backdrop-blur-sm">
+                    <div class="p-6 bg-slate-800/80  ">
                         <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
                             Missões e Módulos
                         </h3>
@@ -502,11 +511,11 @@
                             <div class="text-6xl text-[#7AD988]/30">📄</div>
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
+                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
                             <div class="text-xl text-[#7AD988]">📄</div>
                         </div>
                     </div>
-                    <div class="p-6 bg-slate-800/80 backdrop-blur-sm">
+                    <div class="p-6 bg-slate-800/80  ">
                         <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
                             Simulados Inteligentes
                         </h3>
@@ -525,11 +534,11 @@
                             <div class="text-6xl text-[#7AD988]/30">🧠</div>
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
+                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
                             <div class="text-xl text-[#7AD988]">🧠</div>
                         </div>
                     </div>
-                    <div class="p-6 bg-slate-800/80 backdrop-blur-sm">
+                    <div class="p-6 bg-slate-800/80  ">
                         <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
                             Professores IA
                         </h3>
@@ -548,11 +557,11 @@
                             <div class="text-6xl text-[#7AD988]/30">🏆</div>
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
+                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
                             <div class="text-xl text-[#7AD988]">🏆</div>
                         </div>
                     </div>
-                    <div class="p-6 bg-slate-800/80 backdrop-blur-sm">
+                    <div class="p-6 bg-slate-800/80  ">
                         <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
                             Sistema de Níveis
                         </h3>
@@ -571,11 +580,11 @@
                             <div class="text-6xl text-[#7AD988]/30">⭐</div>
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
+                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
                             <div class="text-xl text-[#7AD988]">⭐</div>
                         </div>
                     </div>
-                    <div class="p-6 bg-slate-800/80 backdrop-blur-sm">
+                    <div class="p-6 bg-slate-800/80  ">
                         <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
                             Competições
                         </h3>
