@@ -49,8 +49,8 @@ landingpage/
 ## URLs Configuradas
 
 Todos os links já estão configurados para apontar para:
-- Login: `https://aluno.eadlex.com/login`
-- Registro: `https://aluno.eadlex.com/register`
+- Login: `https://aluno.eadlex.com.br/login`
+- Registro: `https://aluno.eadlex.com.br/register`
 
 ## Imagens e Vídeos
 
@@ -59,8 +59,9 @@ Todos os links já estão configurados para apontar para:
 
 ## Notas
 
-- O formulário de registro envia para `https://aluno.eadlex.com/register`
-- Todos os CTAs redirecionam para a plataforma principal
+- ✅ **Formulário de registro removido da landing page** - Todos os CTAs redirecionam para `https://aluno.eadlex.com.br/register`
+- Todos os botões "Começar Agora", "Escolher Plano" e "Criar Conta" redirecionam para a página de registro externa
+- Todos os links de login redirecionam para `https://aluno.eadlex.com.br/login`
 - **Use `index.html` se quiser evitar build!** ⭐
 
 # landingpage
