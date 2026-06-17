@@ -3,20 +3,1192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eadLEX - Plataforma Gamificada de Estudos Jurídicos</title>
+    <title>eadLEX - Plataforma Premium de Estudos Jurídicos</title>
     <link rel="icon" type="image/png" href="/images/favicon.ico">
     <link rel="shortcut icon" type="image/png" href="/images/favicon.ico">
     <link rel="apple-touch-icon" href="/images/favicon.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ===========================
-           ANIMAÇÕES GAMIFICADAS
+           DESIGN TOKENS — PROCADE/eadLEX
+           =========================== */
+        :root {
+            --color-navy: #1A2540;
+            --color-blue-800: #223764;
+            --color-blue-700: #2F4D85;
+            --color-blue-500: #4E73B8;
+            --color-blue-100: #EAF0FA;
+            --color-gold: #C89A2B;
+            --color-gold-hover: #B58721;
+            --color-cream: #F8F7F4;
+            --color-cream-soft: #FBFAF6;
+            --color-text-secondary: #5E6675;
+            --font-serif-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', 'Source Sans Pro', system-ui, sans-serif;
+            --font-mono-tech: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+        }
+
+        /* ===========================
+           RESET & BASE
+           =========================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-cream);
+            font-family: var(--font-sans);
+            color: var(--color-navy);
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* ===========================
+           LAYOUT
+           =========================== */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .container-wide {
+            width: 100%;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* ===========================
+           PRIMITIVES
            =========================== */
 
+        /* Eyebrow */
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .eyebrow-rule {
+            width: 40px;
+            height: 1px;
+            background-color: var(--color-gold);
+            flex-shrink: 0;
+        }
+
+        .eyebrow-text {
+            font-family: var(--font-mono-tech);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+        }
+
+        /* Headings */
+        .heading-display {
+            font-family: var(--font-serif-display);
+            font-weight: 700;
+            color: var(--color-navy);
+            line-height: 1.15;
+        }
+
+        .heading-xl {
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
+        }
+
+        .heading-lg {
+            font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+        }
+
+        .heading-md {
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+        }
+
+        /* Card */
+        .card {
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(26, 37, 64, 0.08);
+            box-shadow: 0 2px 6px rgba(26, 37, 64, 0.06);
+            padding: 28px;
+        }
+
+        .card-elevated {
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(26, 37, 64, 0.08);
+            box-shadow: 0 4px 16px rgba(26, 37, 64, 0.08);
+            padding: 28px;
+        }
+
+        /* Buttons */
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 52px;
+            border-radius: 10px;
+            padding: 0 24px;
+            border: 1px solid var(--color-gold);
+            background-color: var(--color-gold);
+            color: #ffffff;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.2s, border-color 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-gold:hover {
+            background-color: var(--color-gold-hover);
+            border-color: var(--color-gold-hover);
+        }
+
+        .btn-navy {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 52px;
+            border-radius: 10px;
+            padding: 0 24px;
+            border: 1px solid var(--color-navy);
+            background-color: var(--color-navy);
+            color: var(--color-cream);
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.2s, border-color 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-navy:hover {
+            background-color: var(--color-blue-800);
+            border-color: var(--color-blue-800);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 52px;
+            border-radius: 10px;
+            padding: 0 24px;
+            border: 1px solid rgba(26, 37, 64, 0.2);
+            background-color: #ffffff;
+            color: var(--color-navy);
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.2s, border-color 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-ghost:hover {
+            background-color: var(--color-blue-100);
+            border-color: var(--color-blue-500);
+        }
+
+        /* Gold accent badge */
+        .badge-blue {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--color-blue-100);
+            color: var(--color-blue-700);
+            border-radius: 999px;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: var(--font-sans);
+        }
+
+        .badge-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: rgba(200, 154, 43, 0.12);
+            color: var(--color-gold);
+            border-radius: 999px;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: var(--font-mono-tech);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* Text secondary */
+        .text-secondary {
+            color: var(--color-text-secondary);
+        }
+
+        /* Section spacing */
+        .section {
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        .section-alt {
+            padding-top: 80px;
+            padding-bottom: 80px;
+            background-color: var(--color-cream-soft);
+        }
+
+        .section-navy {
+            padding-top: 80px;
+            padding-bottom: 80px;
+            background-color: var(--color-navy);
+        }
+
+        /* Progress bar */
+        .progress-track {
+            height: 6px;
+            background-color: var(--color-blue-100);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--color-gold);
+            border-radius: 999px;
+        }
+
+        /* Divider */
+        .divider-gold {
+            width: 48px;
+            height: 3px;
+            background-color: var(--color-gold);
+            border-radius: 2px;
+            margin: 0 auto 24px;
+        }
+
+        /* ===========================
+           HEADER
+           =========================== */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: rgba(251, 250, 246, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(26, 37, 64, 0.08);
+        }
+
+        .site-header nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .nav-logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-link-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-sans);
+        }
+
+        .nav-link-text:hover {
+            color: var(--color-navy);
+        }
+
+        .nav-link-login {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-navy);
+            transition: color 0.2s;
+        }
+
+        .nav-link-login:hover {
+            color: var(--color-blue-700);
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        /* ===========================
+           HERO
+           =========================== */
+        .hero-section {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(160deg, #F8F5F0 0%, #F0EBE2 100%);
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(55% 55% at 50% 50%, rgba(248, 247, 244, 0.78) 0%, rgba(248, 247, 244, 0.35) 55%, rgba(248, 247, 244, 0) 80%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+        }
+
+        .hero-inner {
+            text-align: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-eyebrow {
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif-display);
+            font-weight: 700;
+            color: var(--color-navy);
+            line-height: 1.15;
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-title-accent {
+            color: var(--color-gold);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(26, 37, 64, 0.72);
+            margin-bottom: 40px;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 640px) {
+            .hero-cta-group {
+                flex-direction: row;
+            }
+        }
+
+        .hero-content {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: heroFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+        }
+
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===========================
+           PROPOSTA DE VALOR
+           =========================== */
+        .proposta-text {
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            color: var(--color-text-secondary);
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .proposta-accent {
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+
+        /* ===========================
+           PREVIEW DA PLATAFORMA
+           =========================== */
+        .preview-section {
+            padding-top: 80px;
+            padding-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-video-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .preview-video-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.12;
+        }
+
+        .preview-video-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(26, 37, 64, 0.92);
+        }
+
+        .preview-content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        .preview-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 640px) {
+            .preview-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .preview-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .preview-card {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 14px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .preview-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .preview-card:hover {
+            border-color: rgba(200, 154, 43, 0.5);
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .preview-card-image {
+            position: relative;
+            height: 200px;
+            background-color: rgba(26, 37, 64, 0.4);
+            overflow: hidden;
+        }
+
+        .preview-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.75;
+            transition: opacity 0.3s, transform 0.4s;
+        }
+
+        .preview-card:hover .preview-card-image img {
+            opacity: 0.9;
+            transform: scale(1.04);
+        }
+
+        .preview-card-fallback {
+            display: none;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(26, 37, 64, 0.6);
+        }
+
+        .preview-card-fallback-icon {
+            font-size: 3.5rem;
+            opacity: 0.35;
+        }
+
+        .preview-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26, 37, 64, 0.8) 0%, transparent 60%);
+        }
+
+        .preview-card-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+        }
+
+        .preview-card-icon-badge {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(200, 154, 43, 0.2);
+            border: 1px solid rgba(200, 154, 43, 0.35);
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .preview-card-body {
+            padding: 20px;
+        }
+
+        .preview-card-title {
+            font-family: var(--font-serif-display);
+            font-weight: 600;
+            font-size: 1.0625rem;
+            color: #ffffff;
+            margin-bottom: 6px;
+            transition: color 0.2s;
+        }
+
+        .preview-card:hover .preview-card-title {
+            color: var(--color-gold);
+        }
+
+        .preview-card-desc {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .preview-card[data-card-index="0"] { transition-delay: 0.05s; }
+        .preview-card[data-card-index="1"] { transition-delay: 0.12s; }
+        .preview-card[data-card-index="2"] { transition-delay: 0.19s; }
+        .preview-card[data-card-index="3"] { transition-delay: 0.26s; }
+        .preview-card[data-card-index="4"] { transition-delay: 0.33s; }
+
+        /* ===========================
+           COMO FUNCIONA
+           =========================== */
+        .funciona-grid {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 768px) {
+            .funciona-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .funciona-card {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(26, 37, 64, 0.08);
+            box-shadow: 0 2px 6px rgba(26, 37, 64, 0.06);
+            padding: 32px;
+        }
+
+        .funciona-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .funciona-card:hover {
+            box-shadow: 0 6px 24px rgba(26, 37, 64, 0.10);
+        }
+
+        .funciona-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background-color: var(--color-blue-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .funciona-card-number {
+            font-family: var(--font-mono-tech);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 8px;
+        }
+
+        .funciona-card-title {
+            font-family: var(--font-serif-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--color-navy);
+            margin-bottom: 12px;
+        }
+
+        .funciona-card-text {
+            font-size: 0.9375rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        .funciona-card[data-card-index="0"] { transition-delay: 0.05s; }
+        .funciona-card[data-card-index="1"] { transition-delay: 0.12s; }
+        .funciona-card[data-card-index="2"] { transition-delay: 0.19s; }
+        .funciona-card[data-card-index="3"] { transition-delay: 0.26s; }
+
+        /* Evolução strip */
+        .evolucao-strip {
+            background: var(--color-navy);
+            border-radius: 14px;
+            padding: 36px;
+            margin-top: 48px;
+        }
+
+        .evolucao-strip-title {
+            font-family: var(--font-serif-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .evolucao-strip-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 28px;
+        }
+
+        .evolucao-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .evolucao-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .evolucao-stats {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .evolucao-stat {
+            text-align: center;
+        }
+
+        .evolucao-stat-label {
+            font-family: var(--font-serif-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--color-gold);
+            margin-bottom: 4px;
+        }
+
+        .evolucao-stat-desc {
+            font-size: 0.8125rem;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        /* ===========================
+           PARA QUEM SE DESTINA
+           =========================== */
+        .destina-grid {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 640px) {
+            .destina-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .destina-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .destina-card {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(26, 37, 64, 0.08);
+            box-shadow: 0 2px 6px rgba(26, 37, 64, 0.06);
+            padding: 28px;
+        }
+
+        .destina-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .destina-card:hover {
+            box-shadow: 0 8px 28px rgba(26, 37, 64, 0.10);
+            border-color: rgba(200, 154, 43, 0.3);
+        }
+
+        .destina-card-emoji {
+            font-size: 2.25rem;
+            margin-bottom: 16px;
+        }
+
+        .destina-card-title {
+            font-family: var(--font-serif-display);
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--color-navy);
+            margin-bottom: 10px;
+        }
+
+        .destina-card-text {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            line-height: 1.65;
+        }
+
+        .destina-card[data-card-index="0"] { transition-delay: 0.05s; }
+        .destina-card[data-card-index="1"] { transition-delay: 0.12s; }
+        .destina-card[data-card-index="2"] { transition-delay: 0.19s; }
+        .destina-card[data-card-index="3"] { transition-delay: 0.26s; }
+
+        /* ===========================
+           POR QUE ESCOLHER
+           =========================== */
+        .escolher-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 640px) {
+            .escolher-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .escolher-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .escolher-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(26, 37, 64, 0.08);
+            box-shadow: 0 2px 6px rgba(26, 37, 64, 0.06);
+            padding: 24px;
+        }
+
+        .escolher-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .escolher-card:hover {
+            box-shadow: 0 4px 16px rgba(26, 37, 64, 0.09);
+            border-color: rgba(200, 154, 43, 0.25);
+        }
+
+        .escolher-checkmark {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background-color: var(--color-blue-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-gold);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .escolher-card-title {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--color-navy);
+            margin-bottom: 4px;
+        }
+
+        .escolher-card-text {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        .escolher-card[data-card-index="0"] { transition-delay: 0.05s; }
+        .escolher-card[data-card-index="1"] { transition-delay: 0.1s; }
+        .escolher-card[data-card-index="2"] { transition-delay: 0.15s; }
+        .escolher-card[data-card-index="3"] { transition-delay: 0.2s; }
+        .escolher-card[data-card-index="4"] { transition-delay: 0.25s; }
+        .escolher-card[data-card-index="5"] { transition-delay: 0.3s; }
+        .escolher-card[data-card-index="6"] { transition-delay: 0.35s; }
+
+        /* ===========================
+           PLANOS
+           =========================== */
+        .planos-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 640px) {
+            .planos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .planos-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .planos-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .planos-card {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(26, 37, 64, 0.10);
+            box-shadow: 0 2px 6px rgba(26, 37, 64, 0.06);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .planos-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .planos-card:hover {
+            box-shadow: 0 8px 32px rgba(26, 37, 64, 0.12);
+        }
+
+        .planos-card-featured {
+            border-color: var(--color-gold);
+            border-width: 2px;
+            position: relative;
+        }
+
+        .planos-card-featured::before {
+            content: 'Mais Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--color-gold);
+            color: #ffffff;
+            font-family: var(--font-mono-tech);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 3px 14px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .planos-card-tier {
+            font-family: var(--font-mono-tech);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 8px;
+        }
+
+        .planos-card-name {
+            font-family: var(--font-serif-display);
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: var(--color-navy);
+            margin-bottom: 12px;
+        }
+
+        .planos-card-desc {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+
+        .planos-card-features {
+            list-style: none;
+            margin-bottom: 28px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .planos-card-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.875rem;
+            color: var(--color-navy);
+        }
+
+        .planos-card-feature-icon {
+            color: var(--color-gold);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .planos-card[data-card-index="0"] { transition-delay: 0.05s; }
+        .planos-card[data-card-index="1"] { transition-delay: 0.12s; }
+        .planos-card[data-card-index="2"] { transition-delay: 0.19s; }
+        .planos-card[data-card-index="3"] { transition-delay: 0.26s; }
+        .planos-card[data-card-index="4"] { transition-delay: 0.33s; }
+
+        /* ===========================
+           REGISTRO
+           =========================== */
+        .registro-card {
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(200, 154, 43, 0.25);
+            box-shadow: 0 4px 24px rgba(26, 37, 64, 0.08);
+            padding: 48px 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .registro-card-title {
+            font-family: var(--font-serif-display);
+            font-weight: 700;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--color-navy);
+            margin-bottom: 12px;
+        }
+
+        .registro-card-subtitle {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .registro-login-link {
+            color: var(--color-gold);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .registro-login-link:hover {
+            color: var(--color-gold-hover);
+        }
+
+        /* ===========================
+           CHAMADA FINAL
+           =========================== */
+        .chamada-section {
+            padding-top: 80px;
+            padding-bottom: 80px;
+            background: var(--color-navy);
+        }
+
+        .chamada-inner {
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .chamada-title {
+            font-family: var(--font-serif-display);
+            font-weight: 700;
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.25;
+        }
+
+        .chamada-subtitle {
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .chamada-cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 640px) {
+            .chamada-cta-group {
+                flex-direction: row;
+            }
+        }
+
+        /* ===========================
+           FOOTER
+           =========================== */
+        .site-footer {
+            background-color: var(--color-blue-800);
+            padding-top: 48px;
+            padding-bottom: 48px;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-inner {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .footer-logo {
+            height: 32px;
+            width: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .footer-link {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-sans);
+        }
+
+        .footer-link:hover {
+            color: var(--color-gold);
+        }
+
+        .footer-divider {
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin-bottom: 24px;
+        }
+
+        .footer-copy {
+            text-align: center;
+            font-size: 0.8125rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ===========================
+           SCROLL REVEAL
+           =========================== */
         .section-content {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(24px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .section-visible .section-content {
@@ -24,905 +1196,566 @@
             transform: translateY(0);
         }
 
-        .hero-content {
-            opacity: 0;
-            transform: translateY(50px) scale(0.95);
-            animation: heroFadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes heroFadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .hero-title {
-            animation: titleGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-            0%, 100% {
-                text-shadow: 
-                    0 0 20px rgba(122, 217, 136, 0.5),
-                    0 0 40px rgba(122, 217, 136, 0.3);
-            }
-            50% {
-                text-shadow: 
-                    0 0 30px rgba(122, 217, 136, 0.8),
-                    0 0 60px rgba(122, 217, 136, 0.5),
-                    0 0 80px rgba(122, 217, 136, 0.3);
-            }
-        }
-
-        .professor-card {
-            opacity: 0;
-            transform: translateY(40px) scale(0.9);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .professor-card.animate-in {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .professor-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 10px 40px rgba(122, 217, 136, 0.3),
-                0 0 60px rgba(122, 217, 136, 0.1);
-            border-color: rgba(122, 217, 136, 0.8);
-        }
-
-        .funciona-card {
-            opacity: 0;
-            transform: translateX(-30px);
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .funciona-card.animate-in {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .funciona-card:nth-child(even) {
-            transform: translateX(30px);
-        }
-
-        .funciona-card:nth-child(even).animate-in {
-            transform: translateX(0);
-        }
-
-        .funciona-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 
-                0 15px 50px rgba(19, 37, 121, 0.4),
-                0 0 80px rgba(122, 217, 136, 0.2);
-            border-color: rgba(122, 217, 136, 0.6);
-        }
-
-        .destina-card {
-            opacity: 0;
-            transform: translateY(50px) scale(0.85);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .destina-card.animate-in {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .destina-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 
-                0 20px 60px rgba(122, 217, 136, 0.4),
-                0 0 100px rgba(122, 217, 136, 0.2);
-        }
-
-        .escolher-card {
-            opacity: 0;
-            transform: translateX(-20px) scale(0.95);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .escolher-card.animate-in {
-            opacity: 1;
-            transform: translateX(0) scale(1);
-        }
-
-        .escolher-card:hover {
-            transform: translateX(5px) scale(1.02);
-            background: rgba(30, 41, 59, 0.8);
-            border-color: rgba(122, 217, 136, 0.6);
-            box-shadow: 0 8px 30px rgba(122, 217, 136, 0.2);
-        }
-
-        .planos-card {
-            opacity: 0;
-            transform: translateY(40px) rotateX(15deg);
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .planos-card.animate-in {
-            transform: translateY(0) rotateX(0deg);
-        }
-
-        @keyframes gradientShift {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        .bg-gradient-to-br {
-            background-size: 200% 200%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        .planos-card.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .preview-card {
-            opacity: 0;
-            transform: translateY(50px) scale(0.9);
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .preview-card.animate-in {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .preview-card:hover {
-            transform: translateY(-10px) scale(1.02) rotateY(2deg);
-            box-shadow: 
-                0 20px 60px rgba(122, 217, 136, 0.3),
-                0 0 100px rgba(122, 217, 136, 0.1),
-                inset 0 0 50px rgba(122, 217, 136, 0.05);
-        }
-
-        .preview-card:nth-child(even) {
-            transform: translateY(50px) scale(0.9) rotateY(5deg);
-        }
-
-        .preview-card:nth-child(even).animate-in {
-            transform: translateY(0) scale(1) rotateY(0deg);
-        }
-
-        .preview-card:nth-child(even):hover {
-            transform: translateY(-10px) scale(1.02) rotateY(-2deg);
-        }
-
-        section[data-section-id="preview"] {
-            position: relative;
-        }
-
-        section[data-section-id="preview"] video {
-            filter: blur(0px);
-            transition: filter 0.5s ease;
-        }
-
-        section[data-section-id="preview"]:hover video {
-            filter: blur(1px);
-        }
-
-        .particle-bg {
-            position: absolute;
-            inset: 0;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(122, 217, 136, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(19, 37, 121, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(122, 217, 136, 0.05) 0%, transparent 70%);
-            animation: particlePulse 8s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes particlePulse {
-            0%, 100% {
-                opacity: 0.5;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.1);
-            }
-        }
-
-        section[data-section-id="preview"]::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(circle at 30% 40%, rgba(122, 217, 136, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(19, 37, 121, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 1;
-            animation: overlayGlow 10s ease-in-out infinite;
-        }
-
-        @keyframes overlayGlow {
-            0%, 100% {
-                opacity: 0.3;
-            }
-            50% {
-                opacity: 0.6;
-            }
-        }
-
-        @media (max-width: 768px) {
-            section[data-section-id="preview"] video {
-                opacity: 0.2;
-            }
-            
-            section[data-section-id="preview"] .particle-bg {
-                opacity: 0.7;
-            }
-        }
-
-        .preview-card[data-card-index="0"] { transition-delay: 0.1s; }
-        .preview-card[data-card-index="1"] { transition-delay: 0.2s; }
-        .preview-card[data-card-index="2"] { transition-delay: 0.3s; }
-        .preview-card[data-card-index="3"] { transition-delay: 0.4s; }
-        .preview-card[data-card-index="4"] { transition-delay: 0.5s; }
-        .preview-card[data-card-index="5"] { transition-delay: 0.6s; }
-
-        .professor-card[data-card-index="0"] { transition-delay: 0.1s; }
-        .professor-card[data-card-index="1"] { transition-delay: 0.2s; }
-        .professor-card[data-card-index="2"] { transition-delay: 0.3s; }
-        .professor-card[data-card-index="3"] { transition-delay: 0.4s; }
-        .professor-card[data-card-index="4"] { transition-delay: 0.5s; }
-        .professor-card[data-card-index="5"] { transition-delay: 0.6s; }
-
-        .funciona-card[data-card-index="0"] { transition-delay: 0.1s; }
-        .funciona-card[data-card-index="1"] { transition-delay: 0.2s; }
-        .funciona-card[data-card-index="2"] { transition-delay: 0.3s; }
-        .funciona-card[data-card-index="3"] { transition-delay: 0.4s; }
-
-        .destina-card[data-card-index="0"] { transition-delay: 0.1s; }
-        .destina-card[data-card-index="1"] { transition-delay: 0.2s; }
-        .destina-card[data-card-index="2"] { transition-delay: 0.3s; }
-        .destina-card[data-card-index="3"] { transition-delay: 0.4s; }
-
-        .planos-card[data-card-index="0"] { transition-delay: 0.1s; }
-        .planos-card[data-card-index="1"] { transition-delay: 0.2s; }
-        .planos-card[data-card-index="2"] { transition-delay: 0.3s; }
-        .planos-card[data-card-index="3"] { transition-delay: 0.4s; }
-
-        .escolher-card[data-card-index="0"] { transition-delay: 0.1s; }
-        .escolher-card[data-card-index="1"] { transition-delay: 0.15s; }
-        .escolher-card[data-card-index="2"] { transition-delay: 0.2s; }
-        .escolher-card[data-card-index="3"] { transition-delay: 0.25s; }
-        .escolher-card[data-card-index="4"] { transition-delay: 0.3s; }
-        .escolher-card[data-card-index="5"] { transition-delay: 0.35s; }
-        .escolher-card[data-card-index="6"] { transition-delay: 0.4s; }
-
-        @media (max-width: 768px) {
-            .professor-card,
-            .funciona-card,
-            .destina-card,
-            .escolher-card {
-                transform: translateY(20px) scale(0.95);
-            }
-        }
+        /* ===========================
+           UTIL
+           =========================== */
+        .text-center { text-align: center; }
+        .mt-4 { margin-top: 16px; }
+        .mt-6 { margin-top: 24px; }
+        .mt-8 { margin-top: 32px; }
+        .mt-12 { margin-top: 48px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-6 { margin-bottom: 24px; }
+        .mb-8 { margin-bottom: 32px; }
+        .mb-12 { margin-bottom: 48px; }
+        .mb-16 { margin-bottom: 64px; }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-    <!-- Header/Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80   border-b border-blue-500/20">
-        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <img src="/images/auth-logo.png" alt="eadLEX" class="h-10 w-auto" />
-            </div>
-            <div class="hidden md:flex items-center gap-6">
-                <button onclick="scrollToSection('como-funciona')" class="text-gray-300 hover:text-[#7AD988] transition-colors">
-                    Como Funciona
-                </button>
-                <button onclick="scrollToSection('planos')" class="text-gray-300 hover:text-[#7AD988] transition-colors">
-                    Planos
-                </button>
-                <a href="https://aluno.eadlex.com.br/login" class="text-gray-300 hover:text-[#7AD988] transition-colors">
-                    Entrar
-                </a>
-                <a href="https://aluno.eadlex.com.br/register" class="px-6 py-2 bg-[#132579] text-white rounded-lg hover:bg-[#1a3199] transition-colors font-semibold">
+<body>
+
+    <!-- ========================================================
+         HEADER
+         ======================================================== -->
+    <header class="site-header">
+        <nav class="container">
+            <a href="/">
+                <img src="images/eadlex.png" alt="eadLEX" class="nav-logo" />
+            </a>
+            <div class="nav-links">
+                <button onclick="scrollToSection('como-funciona')" class="nav-link-text">Como Funciona</button>
+                <button onclick="scrollToSection('planos')" class="nav-link-text">Planos</button>
+                <a href="https://aluno.eadlex.com.br/login" class="nav-link-login">Entrar</a>
+                <a href="https://aluno.eadlex.com.br/register" class="btn-gold" style="min-height: 40px; font-size: 13px; padding: 0 20px;">
                     Começar Agora
                 </a>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section data-section-id="hero" class="pt-32 pb-20 px-4 relative overflow-hidden">
-        <!-- Vídeo de Background -->
-        <div class="absolute inset-0 z-0">
-            <video autoplay muted loop playsinline class="w-full h-full object-cover">
-                <source src="/videos/landing/background.mp4" type="video/mp4" />
-                <source src="/videos/landing/background.webm" type="video/webm" />
-            </video>
-            <!-- Overlay escuro sutil para melhorar legibilidade -->
-            <div class="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-900/60 to-slate-900/70"></div>
-        </div>
-        <div class="container mx-auto max-w-6xl relative z-10">
-            <div class="text-center mb-16 hero-content">
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight hero-title drop-shadow-2xl" style="text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.6);">
-                    A Plataforma Gamificada que 
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#7AD988] to-[#23C13A]">
-                        Eleva sua Performance
-                    </span>
-                    <br />
-                    em Concursos, Exame da OAB e Estudos Jurídicos Avançados
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-100 mb-10 max-w-4xl mx-auto leading-relaxed drop-shadow-lg" style="text-shadow: 0 2px 15px rgba(0, 0, 0, 0.7), 0 1px 5px rgba(0, 0, 0, 0.5);">
-                    Aprenda com professores de alta performance criados por Inteligência Artificial, receba explicações detalhadas, resolva questões, avance em níveis e desenvolva as competências exigidas nas provas mais desafiadoras do país.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="https://aluno.eadlex.com.br/register" class="px-8 py-4 bg-gradient-to-r from-[#7AD988] to-[#23C13A] text-black rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-[#7AD988]/50 transition-all transform hover:scale-105 flex items-center gap-2">
-                        🚀 Começar Agora
-                    </a>
-                    <button onclick="scrollToSection('como-funciona')" class="px-8 py-4 bg-transparent border-2 border-[#7AD988] text-[#7AD988] rounded-xl font-bold text-lg hover:bg-[#7AD988]/10 transition-all flex items-center gap-2">
-                        📖 Conhecer a Plataforma
-                    </button>
+    <!-- ========================================================
+         HERO
+         ======================================================== -->
+    <section data-section-id="hero" class="hero-section">
+        <div class="hero-content-wrapper">
+            <div class="container">
+                <div class="hero-inner hero-content">
+                    <div class="eyebrow hero-eyebrow">
+                        <div class="eyebrow-rule"></div>
+                        <span class="eyebrow-text">Ecossistema Jurídico Premium</span>
+                        <div class="eyebrow-rule"></div>
+                    </div>
+
+                    <h1 class="hero-title">
+                        A Plataforma Jurídica Premium que
+                        <span class="hero-title-accent"> Eleva sua Performance</span>
+                        <br />em Concursos, Exame da OAB e Estudos Jurídicos Avançados
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        Estude com trilhas estruturadas, simulados realistas e um sistema de evolução por níveis. Receba explicações detalhadas, resolva questões e desenvolva as competências exigidas nas provas mais desafiadoras do país.
+                    </p>
+
+                    <div class="hero-cta-group">
+                        <a href="https://aluno.eadlex.com.br/register" class="btn-gold" style="font-size: 15px; padding: 0 32px;">
+                            Começar Agora
+                        </a>
+                        <button onclick="scrollToSection('como-funciona')" class="btn-ghost" style="font-size: 15px; padding: 0 32px;">
+                            Conhecer a Plataforma
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Proposta de Valor -->
-    <section data-section-id="proposta" class="py-20 px-4 bg-slate-800/50">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-12 section-content">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Proposta de Valor</h2>
-                <p class="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                    A <span class="text-[#7AD988] font-semibold">eadLEX</span> oferece um ecossistema de aprendizagem jurídica inovador, combinando gamificação, tecnologia educacional especializada e professores IA capazes de corrigir questões, explicar fundamentos e orientar o raciocínio jurídico com precisão.
+    <!-- ========================================================
+         PROPOSTA DE VALOR
+         ======================================================== -->
+    <section data-section-id="proposta" class="section-alt">
+        <div class="container">
+            <div class="text-center section-content">
+                <div class="eyebrow">
+                    <div class="eyebrow-rule"></div>
+                    <span class="eyebrow-text">Nossa Proposta</span>
+                    <div class="eyebrow-rule"></div>
+                </div>
+                <h2 class="heading-display heading-lg mb-6">Proposta de Valor</h2>
+                <div class="divider-gold"></div>
+                <p class="proposta-text">
+                    A <span class="proposta-accent">eadLEX</span> oferece um ecossistema de aprendizagem jurídica inovador, combinando trilhas estruturadas, tecnologia educacional especializada e um sistema de progresso que orienta cada etapa do raciocínio jurídico com precisão.
                 </p>
-                <p class="text-lg text-gray-400 mt-6 max-w-3xl mx-auto">
+                <p class="proposta-text mt-6" style="font-size: 0.9375rem;">
                     Nossa solução foi projetada para quem busca aprovação em concursos públicos, excelência acadêmica, e preparação consistente para o Exame da Ordem.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Professores IA -->
-    <section data-section-id="professores" class="py-20 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-16 section-content">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                    Professores IA: Especialistas que Corrigem, Explicam e Apontam o Caminho
-                </h2>
-                <p class="text-xl text-gray-300 max-w-4xl mx-auto mb-12">
-                    Os professores IA eadLEX foram desenvolvidos para atuar como mestres jurídicos altamente qualificados.
-                </p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="professor-card bg-slate-800/50 p-6 rounded-xl border border-blue-500/20 hover:border-[#7AD988]/50 transition-all" data-card-index="0">
-                    <div class="w-10 h-10 text-[#7AD988] mb-4 text-2xl">✓</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Corrigem questões com rigor técnico</h3>
-                    <p class="text-gray-300">Análise precisa e fundamentada de cada resposta.</p>
-                </div>
-                <div class="professor-card bg-slate-800/50 p-6 rounded-xl border border-blue-500/20 hover:border-[#7AD988]/50 transition-all" data-card-index="1">
-                    <div class="w-10 h-10 text-[#7AD988] mb-4 text-2xl">🧠</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Explicam passo a passo o raciocínio jurídico</h3>
-                    <p class="text-gray-300">Orientações claras sobre o pensamento esperado.</p>
-                </div>
-                <div class="professor-card bg-slate-800/50 p-6 rounded-xl border border-blue-500/20 hover:border-[#7AD988]/50 transition-all" data-card-index="2">
-                    <div class="w-10 h-10 text-[#7AD988] mb-4 text-2xl">📄</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Indicam os fundamentos legais pertinentes</h3>
-                    <p class="text-gray-300">Citações normativas e referências precisas.</p>
-                </div>
-                <div class="professor-card bg-slate-800/50 p-6 rounded-xl border border-blue-500/20 hover:border-[#7AD988]/50 transition-all" data-card-index="3">
-                    <div class="w-10 h-10 text-[#7AD988] mb-4 text-2xl">🛡️</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Apontam erros comuns e mostram como evitá-los</h3>
-                    <p class="text-gray-300">Prevenção de equívocos frequentes.</p>
-                </div>
-                <div class="professor-card bg-slate-800/50 p-6 rounded-xl border border-blue-500/20 hover:border-[#7AD988]/50 transition-all" data-card-index="4">
-                    <div class="w-10 h-10 text-[#7AD988] mb-4 text-2xl">🎯</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Auxiliam na preparação para concursos e OAB</h3>
-                    <p class="text-gray-300">Suporte completo para provas objetivas e discursivas.</p>
-                </div>
-                <div class="professor-card bg-slate-800/50 p-6 rounded-xl border border-blue-500/20 hover:border-[#7AD988]/50 transition-all" data-card-index="5">
-                    <div class="w-10 h-10 text-[#7AD988] mb-4 text-2xl">⚡</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Disponibilidade imediata. Precisão acadêmica.</h3>
-                    <p class="text-gray-300">Aprendizagem contínua, 24 horas por dia.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Preview da Plataforma -->
-    <section data-section-id="preview" class="py-20 px-4 relative overflow-hidden">
-        <!-- Vídeo de Background -->
-        <div class="absolute inset-0 z-0">
-            <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-30">
-                <source src="/videos/landing/background.mp4" type="video/mp4" />
-                <source src="/videos/landing/background.webm" type="video/webm" />
+    <!-- ========================================================
+         PREVIEW DA PLATAFORMA
+         ======================================================== -->
+    <section data-section-id="preview" class="preview-section">
+        <div class="preview-video-bg">
+            <video autoplay muted loop playsinline>
+                <source src="videos/landing/background.mp4" type="video/mp4" />
             </video>
-            <!-- Overlay gradiente para melhorar legibilidade -->
-            <div class="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-blue-900/80 to-slate-900/90"></div>
-            <!-- Efeito de partículas animadas -->
-            <div class="absolute inset-0">
-                <div class="particle-bg"></div>
-            </div>
+            <div class="preview-video-overlay"></div>
         </div>
-        
-        <div class="container mx-auto max-w-7xl relative z-10">
-            <div class="text-center mb-16 section-content">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                    Veja Como é Por Dentro
-                </h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Conheça a interface gamificada e intuitiva da plataforma eadLEX
+
+        <div class="preview-content-wrapper container-wide">
+            <div class="text-center section-content mb-12">
+                <div class="eyebrow">
+                    <div class="eyebrow-rule" style="background-color: rgba(200,154,43,0.6);"></div>
+                    <span class="eyebrow-text" style="color: rgba(200,154,43,0.9);">Interface</span>
+                    <div class="eyebrow-rule" style="background-color: rgba(200,154,43,0.6);"></div>
+                </div>
+                <h2 class="heading-display heading-lg mb-4" style="color: #ffffff;">Veja Como é Por Dentro</h2>
+                <div class="divider-gold"></div>
+                <p style="font-size: 1rem; color: rgba(255,255,255,0.65); max-width: 500px; margin: 0 auto; line-height: 1.7;">
+                    Conheça a interface premium e intuitiva da plataforma eadLEX
                 </p>
             </div>
-            
-            <!-- Grid de Screenshots -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="preview-card group relative overflow-hidden rounded-2xl border-2 border-blue-500/20 hover:border-[#7AD988]/50 transition-all duration-500" data-card-index="0">
-                    <div class="relative h-64 bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden">
-                        <img src="/images/landing/screenshots/dashboard.png" alt="Dashboard Gamificado" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-110 transition-transform duration-700" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />
-                        <div class="hidden w-full h-full items-center justify-center bg-gradient-to-br from-[#132579] to-slate-800">
-                            <div class="text-6xl text-[#7AD988]/30">📈</div>
+
+            <div class="preview-grid">
+                <div class="preview-card" data-card-index="0">
+                    <div class="preview-card-image">
+                        <img src="images/landing/screenshots/dashboard.png" alt="Dashboard de Progresso"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="preview-card-fallback" style="display:none;">
+                            <span class="preview-card-fallback-icon">📈</span>
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
-                            <div class="text-xl text-[#7AD988]">📈</div>
+                        <div class="preview-card-overlay"></div>
+                        <div class="preview-card-badge">
+                            <div class="preview-card-icon-badge">📈</div>
                         </div>
                     </div>
-                    <div class="p-6 bg-slate-800/80  ">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
-                            Dashboard Gamificado
-                        </h3>
-                        <p class="text-gray-400 text-sm">
-                            Acompanhe seu progresso, níveis e conquistas
-                        </p>
-                    </div>
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#7AD988]/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <div class="preview-card-body">
+                        <h3 class="preview-card-title">Dashboard de Progresso</h3>
+                        <p class="preview-card-desc">Acompanhe seu progresso, níveis e conquistas</p>
                     </div>
                 </div>
-                <div class="preview-card group relative overflow-hidden rounded-2xl border-2 border-blue-500/20 hover:border-[#7AD988]/50 transition-all duration-500" data-card-index="1">
-                    <div class="relative h-64 bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden">
-                        <img src="/images/landing/screenshots/missoes.png" alt="Missões e Módulos" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-110 transition-transform duration-700" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />
-                        <div class="hidden w-full h-full items-center justify-center bg-gradient-to-br from-[#132579] to-slate-800">
-                            <div class="text-6xl text-[#7AD988]/30">🎯</div>
+
+                <div class="preview-card" data-card-index="1">
+                    <div class="preview-card-image">
+                        <img src="images/landing/screenshots/missoes.png" alt="Missões e Módulos"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="preview-card-fallback" style="display:none;">
+                            <span class="preview-card-fallback-icon">🎯</span>
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
-                            <div class="text-xl text-[#7AD988]">🎯</div>
+                        <div class="preview-card-overlay"></div>
+                        <div class="preview-card-badge">
+                            <div class="preview-card-icon-badge">🎯</div>
                         </div>
                     </div>
-                    <div class="p-6 bg-slate-800/80  ">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
-                            Missões e Módulos
-                        </h3>
-                        <p class="text-gray-400 text-sm">
-                            Trilhas estruturadas com conteúdo completo
-                        </p>
-                    </div>
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#7AD988]/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <div class="preview-card-body">
+                        <h3 class="preview-card-title">Missões e Módulos</h3>
+                        <p class="preview-card-desc">Trilhas estruturadas com conteúdo completo</p>
                     </div>
                 </div>
-                <div class="preview-card group relative overflow-hidden rounded-2xl border-2 border-blue-500/20 hover:border-[#7AD988]/50 transition-all duration-500" data-card-index="2">
-                    <div class="relative h-64 bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden">
-                        <img src="/images/landing/screenshots/simulados.png" alt="Simulados Inteligentes" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-110 transition-transform duration-700" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />
-                        <div class="hidden w-full h-full items-center justify-center bg-gradient-to-br from-[#132579] to-slate-800">
-                            <div class="text-6xl text-[#7AD988]/30">📄</div>
+
+                <div class="preview-card" data-card-index="2">
+                    <div class="preview-card-image">
+                        <img src="images/landing/screenshots/simulados.png" alt="Simulados Inteligentes"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="preview-card-fallback" style="display:none;">
+                            <span class="preview-card-fallback-icon">📄</span>
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
-                            <div class="text-xl text-[#7AD988]">📄</div>
+                        <div class="preview-card-overlay"></div>
+                        <div class="preview-card-badge">
+                            <div class="preview-card-icon-badge">📄</div>
                         </div>
                     </div>
-                    <div class="p-6 bg-slate-800/80  ">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
-                            Simulados Inteligentes
-                        </h3>
-                        <p class="text-gray-400 text-sm">
-                            Provas realistas por banca e área
-                        </p>
-                    </div>
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#7AD988]/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <div class="preview-card-body">
+                        <h3 class="preview-card-title">Simulados Inteligentes</h3>
+                        <p class="preview-card-desc">Provas realistas por banca e área</p>
                     </div>
                 </div>
-                <div class="preview-card group relative overflow-hidden rounded-2xl border-2 border-blue-500/20 hover:border-[#7AD988]/50 transition-all duration-500" data-card-index="3">
-                    <div class="relative h-64 bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden">
-                        <img src="/images/landing/screenshots/professores-ia.png" alt="Professores IA" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-110 transition-transform duration-700" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />
-                        <div class="hidden w-full h-full items-center justify-center bg-gradient-to-br from-[#132579] to-slate-800">
-                            <div class="text-6xl text-[#7AD988]/30">🧠</div>
+
+                <div class="preview-card" data-card-index="3">
+                    <div class="preview-card-image">
+                        <img src="images/landing/screenshots/niveis.png" alt="Sistema de Níveis"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="preview-card-fallback" style="display:none;">
+                            <span class="preview-card-fallback-icon">🏆</span>
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
-                            <div class="text-xl text-[#7AD988]">🧠</div>
+                        <div class="preview-card-overlay"></div>
+                        <div class="preview-card-badge">
+                            <div class="preview-card-icon-badge">🏆</div>
                         </div>
                     </div>
-                    <div class="p-6 bg-slate-800/80  ">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
-                            Professores IA
-                        </h3>
-                        <p class="text-gray-400 text-sm">
-                            Explicações detalhadas e personalizadas
-                        </p>
-                    </div>
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#7AD988]/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <div class="preview-card-body">
+                        <h3 class="preview-card-title">Sistema de Níveis</h3>
+                        <p class="preview-card-desc">Evolua ganhando XP e desbloqueando badges</p>
                     </div>
                 </div>
-                <div class="preview-card group relative overflow-hidden rounded-2xl border-2 border-blue-500/20 hover:border-[#7AD988]/50 transition-all duration-500" data-card-index="4">
-                    <div class="relative h-64 bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden">
-                        <img src="/images/landing/screenshots/niveis.png" alt="Sistema de Níveis" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-110 transition-transform duration-700" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />
-                        <div class="hidden w-full h-full items-center justify-center bg-gradient-to-br from-[#132579] to-slate-800">
-                            <div class="text-6xl text-[#7AD988]/30">🏆</div>
+
+                <div class="preview-card" data-card-index="4">
+                    <div class="preview-card-image">
+                        <img src="images/landing/screenshots/competicoes.png" alt="Competições"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="preview-card-fallback" style="display:none;">
+                            <span class="preview-card-fallback-icon">⭐</span>
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
-                            <div class="text-xl text-[#7AD988]">🏆</div>
-                        </div>
-                    </div>
-                    <div class="p-6 bg-slate-800/80  ">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
-                            Sistema de Níveis
-                        </h3>
-                        <p class="text-gray-400 text-sm">
-                            Evolua ganhando XP e desbloqueando badges
-                        </p>
-                    </div>
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#7AD988]/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                    </div>
-                </div>
-                <div class="preview-card group relative overflow-hidden rounded-2xl border-2 border-blue-500/20 hover:border-[#7AD988]/50 transition-all duration-500" data-card-index="5">
-                    <div class="relative h-64 bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden">
-                        <img src="/images/landing/screenshots/competicoes.png" alt="Competições" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-110 transition-transform duration-700" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />
-                        <div class="hidden w-full h-full items-center justify-center bg-gradient-to-br from-[#132579] to-slate-800">
-                            <div class="text-6xl text-[#7AD988]/30">⭐</div>
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                        <div class="absolute top-4 right-4 w-12 h-12 bg-[#7AD988]/20 rounded-full flex items-center justify-center   border border-[#7AD988]/30 group-hover:bg-[#7AD988]/30 group-hover:scale-110 transition-all">
-                            <div class="text-xl text-[#7AD988]">⭐</div>
+                        <div class="preview-card-overlay"></div>
+                        <div class="preview-card-badge">
+                            <div class="preview-card-icon-badge">⭐</div>
                         </div>
                     </div>
-                    <div class="p-6 bg-slate-800/80  ">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#7AD988] transition-colors">
-                            Competições
-                        </h3>
-                        <p class="text-gray-400 text-sm">
-                            Desafie-se e compare seu desempenho
-                        </p>
-                    </div>
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#7AD988]/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <div class="preview-card-body">
+                        <h3 class="preview-card-title">Competições</h3>
+                        <p class="preview-card-desc">Desafie-se e compare seu desempenho</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- CTA -->
-            <div class="text-center mt-12 section-content">
-                <p class="text-gray-300 mb-6 text-lg">
+
+            <div class="text-center section-content mt-12">
+                <p style="color: rgba(255,255,255,0.65); font-size: 1rem; margin-bottom: 24px;">
                     Quer ver mais? Crie sua conta e explore todas as funcionalidades!
                 </p>
-                <a href="https://aluno.eadlex.com.br/register" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#7AD988] to-[#23C13A] text-black rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-[#7AD988]/50 transition-all transform hover:scale-105">
-                    🚀 Começar Agora
+                <a href="https://aluno.eadlex.com.br/register" class="btn-gold" style="font-size: 15px; padding: 0 32px;">
+                    Começar Agora
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Como Funciona -->
-    <section id="como-funciona" data-section-id="como-funciona" class="py-20 px-4 bg-slate-800/50">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-16 section-content">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Como Funciona a Plataforma</h2>
+    <!-- ========================================================
+         COMO FUNCIONA
+         ======================================================== -->
+    <section id="como-funciona" data-section-id="como-funciona" class="section-alt">
+        <div class="container">
+            <div class="text-center section-content mb-12">
+                <div class="eyebrow">
+                    <div class="eyebrow-rule"></div>
+                    <span class="eyebrow-text">Metodologia</span>
+                    <div class="eyebrow-rule"></div>
+                </div>
+                <h2 class="heading-display heading-lg mb-4">Como Funciona a Plataforma</h2>
+                <div class="divider-gold"></div>
             </div>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="funciona-card bg-gradient-to-br from-[#132579] to-slate-800 p-8 rounded-xl border border-blue-500/30" data-card-index="0">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-[#7AD988]/20 rounded-full flex items-center justify-center text-2xl">🎯</div>
-                        <h3 class="text-2xl font-bold text-white">1. Missões Jurídicas Gamificadas</h3>
-                    </div>
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Trilhas estruturadas do básico ao avançado, com conteúdos, exercícios e desafios que fortalecem sua preparação.
-                    </p>
+
+            <div class="funciona-grid">
+                <div class="funciona-card" data-card-index="0">
+                    <div class="funciona-card-icon">🎯</div>
+                    <div class="funciona-card-number">Passo 01</div>
+                    <h3 class="funciona-card-title">Missões Jurídicas Estruturadas</h3>
+                    <p class="funciona-card-text">Trilhas estruturadas do básico ao avançado, com conteúdos, exercícios e desafios que fortalecem sua preparação.</p>
                 </div>
-                <div class="funciona-card bg-gradient-to-br from-[#132579] to-slate-800 p-8 rounded-xl border border-blue-500/30" data-card-index="1">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-[#7AD988]/20 rounded-full flex items-center justify-center text-2xl">🧠</div>
-                        <h3 class="text-2xl font-bold text-white">2. Questões Comentadas por IA</h3>
-                    </div>
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Resoluções completas, análises de alternativas, citações normativas e orientação personalizada.
-                    </p>
+                <div class="funciona-card" data-card-index="1">
+                    <div class="funciona-card-icon">🧠</div>
+                    <div class="funciona-card-number">Passo 02</div>
+                    <h3 class="funciona-card-title">Explicações Detalhadas das Questões</h3>
+                    <p class="funciona-card-text">Resoluções completas, análises de alternativas, citações normativas e orientação personalizada.</p>
                 </div>
-                <div class="funciona-card bg-gradient-to-br from-[#132579] to-slate-800 p-8 rounded-xl border border-blue-500/30" data-card-index="2">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-[#7AD988]/20 rounded-full flex items-center justify-center text-2xl">📄</div>
-                        <h3 class="text-2xl font-bold text-white">3. Simulados Inteligentes</h3>
-                    </div>
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Provas modeladas nos principais concursos, banca por banca, e simulados exclusivos para o Exame da Ordem.
-                    </p>
+                <div class="funciona-card" data-card-index="2">
+                    <div class="funciona-card-icon">📄</div>
+                    <div class="funciona-card-number">Passo 03</div>
+                    <h3 class="funciona-card-title">Simulados Inteligentes</h3>
+                    <p class="funciona-card-text">Provas modeladas nos principais concursos, banca por banca, e simulados exclusivos para o Exame da Ordem.</p>
                 </div>
-                <div class="funciona-card bg-gradient-to-br from-[#132579] to-slate-800 p-8 rounded-xl border border-blue-500/30" data-card-index="3">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-[#7AD988]/20 rounded-full flex items-center justify-center text-2xl">🏆</div>
-                        <h3 class="text-2xl font-bold text-white">4. Competências Jurídicas</h3>
-                    </div>
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Desafios avançados que avaliam interpretação, argumentação e tomada de decisão — habilidades indispensáveis.
-                    </p>
+                <div class="funciona-card" data-card-index="3">
+                    <div class="funciona-card-icon">🏆</div>
+                    <div class="funciona-card-number">Passo 04</div>
+                    <h3 class="funciona-card-title">Competências Jurídicas</h3>
+                    <p class="funciona-card-text">Desafios avançados que avaliam interpretação, argumentação e tomada de decisão — habilidades indispensáveis.</p>
                 </div>
             </div>
-            <div class="mt-12 bg-slate-800/70 p-8 rounded-xl border border-[#7AD988]/30">
-                <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                    📈 Sistema de Evolução
-                </h3>
-                <p class="text-gray-300 text-lg mb-4">Acompanhe sua jornada com:</p>
-                <div class="grid md:grid-cols-5 gap-4">
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-[#7AD988] mb-2">Níveis</div>
-                        <div class="text-gray-400">Progressão contínua</div>
+
+            <div class="evolucao-strip">
+                <div class="evolucao-strip-title">Sistema de Evolução</div>
+                <div class="evolucao-strip-subtitle">Acompanhe sua jornada com indicadores de alta performance</div>
+                <div class="evolucao-stats">
+                    <div class="evolucao-stat">
+                        <div class="evolucao-stat-label">Níveis</div>
+                        <div class="evolucao-stat-desc">Progressão contínua</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-[#7AD988] mb-2">XP</div>
-                        <div class="text-gray-400">Experiência acumulada</div>
+                    <div class="evolucao-stat">
+                        <div class="evolucao-stat-label">XP</div>
+                        <div class="evolucao-stat-desc">Experiência acumulada</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-[#7AD988] mb-2">Badges</div>
-                        <div class="text-gray-400">Conquistas desbloqueadas</div>
+                    <div class="evolucao-stat">
+                        <div class="evolucao-stat-label">Badges</div>
+                        <div class="evolucao-stat-desc">Conquistas desbloqueadas</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-[#7AD988] mb-2">Dashboard</div>
-                        <div class="text-gray-400">Desempenho detalhado</div>
+                    <div class="evolucao-stat">
+                        <div class="evolucao-stat-label">Dashboard</div>
+                        <div class="evolucao-stat-desc">Desempenho detalhado</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-[#7AD988] mb-2">Histórico</div>
-                        <div class="text-gray-400">Aprendizagem completa</div>
+                    <div class="evolucao-stat">
+                        <div class="evolucao-stat-label">Histórico</div>
+                        <div class="evolucao-stat-desc">Aprendizagem completa</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Para Quem se Destina -->
-    <section data-section-id="destina" class="py-20 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-16 section-content">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Para Quem se Destina</h2>
+    <!-- ========================================================
+         PARA QUEM SE DESTINA
+         ======================================================== -->
+    <section data-section-id="destina" class="section">
+        <div class="container">
+            <div class="text-center section-content mb-12">
+                <div class="eyebrow">
+                    <div class="eyebrow-rule"></div>
+                    <span class="eyebrow-text">Público-Alvo</span>
+                    <div class="eyebrow-rule"></div>
+                </div>
+                <h2 class="heading-display heading-lg mb-4">Para Quem se Destina</h2>
+                <div class="divider-gold"></div>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="destina-card bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-xl border border-blue-500/20 hover:border-[#7AD988]/50 transition-all transform hover:scale-105" data-card-index="0">
-                    <div class="text-4xl mb-4">👥</div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Concurseiros</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Ambiente completo para quem busca aprovação em carreiras jurídicas ou administrativas.
-                    </p>
-                </div>
-                <div class="destina-card bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-xl border border-blue-500/20 hover:border-[#7AD988]/50 transition-all transform hover:scale-105" data-card-index="1">
-                    <div class="text-4xl mb-4">🎓</div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Estudantes de Direito</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Ferramentas para consolidar o conhecimento jurídico e ampliar a capacidade analítica.
-                    </p>
-                </div>
-                <div class="destina-card bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-xl border border-blue-500/20 hover:border-[#7AD988]/50 transition-all transform hover:scale-105" data-card-index="2">
-                    <div class="text-4xl mb-4">🏅</div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Candidatos à OAB</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Simulados estratégicos e explicações minuciosas para cada etapa da prova.
-                    </p>
-                </div>
-                <div class="destina-card bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-xl border border-blue-500/20 hover:border-[#7AD988]/50 transition-all transform hover:scale-105" data-card-index="3">
-                    <div class="text-4xl mb-4">📈</div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Profissionais</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Aprimoramento contínuo com suporte de professores IA e trilhas aprofundadas.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Por que Escolher -->
-    <section data-section-id="escolher" class="py-20 px-4 bg-slate-800/50">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-16 section-content">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Por que Escolher a eadLEX</h2>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="escolher-card flex items-start gap-4 bg-slate-800/50 p-6 rounded-xl border border-blue-500/20" data-card-index="0">
-                    <div class="text-2xl">✓</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white mb-2">Professores IA especializados</h3>
-                        <p class="text-gray-400">Expertise focada em cada disciplina jurídica.</p>
-                    </div>
+            <div class="destina-grid">
+                <div class="destina-card" data-card-index="0">
+                    <div class="destina-card-emoji">👥</div>
+                    <h3 class="destina-card-title">Concurseiros</h3>
+                    <p class="destina-card-text">Ambiente completo para quem busca aprovação em carreiras jurídicas ou administrativas.</p>
                 </div>
-                <div class="escolher-card flex items-start gap-4 bg-slate-800/50 p-6 rounded-xl border border-blue-500/20" data-card-index="1">
-                    <div class="text-2xl">✓</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white mb-2">Explicações completas e fundamentadas</h3>
-                        <p class="text-gray-400">Conteúdo de alta qualidade acadêmica.</p>
-                    </div>
+                <div class="destina-card" data-card-index="1">
+                    <div class="destina-card-emoji">🎓</div>
+                    <h3 class="destina-card-title">Estudantes de Direito</h3>
+                    <p class="destina-card-text">Ferramentas para consolidar o conhecimento jurídico e ampliar a capacidade analítica.</p>
                 </div>
-                <div class="escolher-card flex items-start gap-4 bg-slate-800/50 p-6 rounded-xl border border-blue-500/20" data-card-index="2">
-                    <div class="text-2xl">✓</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white mb-2">Aprendizagem orientada por dados</h3>
-                        <p class="text-gray-400">Acompanhamento detalhado do seu progresso.</p>
-                    </div>
+                <div class="destina-card" data-card-index="2">
+                    <div class="destina-card-emoji">🏅</div>
+                    <h3 class="destina-card-title">Candidatos à OAB</h3>
+                    <p class="destina-card-text">Simulados estratégicos e explicações minuciosas para cada etapa da prova.</p>
                 </div>
-                <div class="escolher-card flex items-start gap-4 bg-slate-800/50 p-6 rounded-xl border border-blue-500/20" data-card-index="3">
-                    <div class="text-2xl">✓</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white mb-2">Gamificação para engajamento</h3>
-                        <p class="text-gray-400">Sistema de recompensas que motiva o estudo.</p>
-                    </div>
-                </div>
-                <div class="escolher-card flex items-start gap-4 bg-slate-800/50 p-6 rounded-xl border border-blue-500/20" data-card-index="4">
-                    <div class="text-2xl">✓</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white mb-2">Simulados realistas</h3>
-                        <p class="text-gray-400">Preparação alinhada com as provas reais.</p>
-                    </div>
-                </div>
-                <div class="escolher-card flex items-start gap-4 bg-slate-800/50 p-6 rounded-xl border border-blue-500/20" data-card-index="5">
-                    <div class="text-2xl">✓</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white mb-2">Evolução personalizada</h3>
-                        <p class="text-gray-400">Adaptação ao seu ritmo de aprendizado.</p>
-                    </div>
-                </div>
-                <div class="escolher-card flex items-start gap-4 bg-slate-800/50 p-6 rounded-xl border border-blue-500/20" data-card-index="6">
-                    <div class="text-2xl">✓</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white mb-2">Plataforma segura e responsiva</h3>
-                        <p class="text-gray-400">Acesso de qualquer dispositivo com segurança.</p>
-                    </div>
+                <div class="destina-card" data-card-index="3">
+                    <div class="destina-card-emoji">📈</div>
+                    <h3 class="destina-card-title">Profissionais</h3>
+                    <p class="destina-card-text">Aprimoramento contínuo com suporte personalizado e trilhas aprofundadas.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Planos de Acesso -->
-    <section id="planos" data-section-id="planos" class="py-20 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-16 section-content">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Planos de Acesso</h2>
+    <!-- ========================================================
+         POR QUE ESCOLHER
+         ======================================================== -->
+    <section data-section-id="escolher" class="section-alt">
+        <div class="container">
+            <div class="text-center section-content mb-12">
+                <div class="eyebrow">
+                    <div class="eyebrow-rule"></div>
+                    <span class="eyebrow-text">Diferenciais</span>
+                    <div class="eyebrow-rule"></div>
+                </div>
+                <h2 class="heading-display heading-lg mb-4">Por que Escolher a eadLEX</h2>
+                <div class="divider-gold"></div>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Plano BRONZE -->
-                <div class="planos-card bg-gradient-to-br from-amber-900/80 to-amber-950/90 p-8 rounded-xl border-2 border-amber-600/50 hover:border-amber-500 transition-all" data-card-index="0">
-                    <h3 class="text-3xl font-bold text-white mb-4">BRONZE</h3>
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="text-amber-400">🔓</span>
-                        <span class="text-sm font-bold text-amber-300 uppercase">Acesso Liberado</span>
+
+            <div class="escolher-grid">
+                <div class="escolher-card" data-card-index="0">
+                    <div class="escolher-checkmark">✓</div>
+                    <div>
+                        <h3 class="escolher-card-title">Trilhas curadas por especialistas</h3>
+                        <p class="escolher-card-text">Conteúdo especializado em cada disciplina jurídica.</p>
                     </div>
-                    <p class="text-gray-300 mb-6 text-sm leading-relaxed">
-                        Plano Bronze com acesso aos módulos básicos do curso de Direito. Ideal para quem quer começar seus estudos com flexibilidade. Acesso a uma aula bônus.
-                    </p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
-                            Acesso completo ao curso
+                </div>
+                <div class="escolher-card" data-card-index="1">
+                    <div class="escolher-checkmark">✓</div>
+                    <div>
+                        <h3 class="escolher-card-title">Explicações completas e fundamentadas</h3>
+                        <p class="escolher-card-text">Conteúdo de alta qualidade acadêmica.</p>
+                    </div>
+                </div>
+                <div class="escolher-card" data-card-index="2">
+                    <div class="escolher-checkmark">✓</div>
+                    <div>
+                        <h3 class="escolher-card-title">Aprendizagem orientada por dados</h3>
+                        <p class="escolher-card-text">Acompanhamento detalhado do seu progresso.</p>
+                    </div>
+                </div>
+                <div class="escolher-card" data-card-index="3">
+                    <div class="escolher-checkmark">✓</div>
+                    <div>
+                        <h3 class="escolher-card-title">Sistema de progresso e engajamento</h3>
+                        <p class="escolher-card-text">Sistema de recompensas que motiva o estudo.</p>
+                    </div>
+                </div>
+                <div class="escolher-card" data-card-index="4">
+                    <div class="escolher-checkmark">✓</div>
+                    <div>
+                        <h3 class="escolher-card-title">Simulados realistas</h3>
+                        <p class="escolher-card-text">Preparação alinhada com as provas reais.</p>
+                    </div>
+                </div>
+                <div class="escolher-card" data-card-index="5">
+                    <div class="escolher-checkmark">✓</div>
+                    <div>
+                        <h3 class="escolher-card-title">Evolução personalizada</h3>
+                        <p class="escolher-card-text">Adaptação ao seu ritmo de aprendizado.</p>
+                    </div>
+                </div>
+                <div class="escolher-card" data-card-index="6">
+                    <div class="escolher-checkmark">✓</div>
+                    <div>
+                        <h3 class="escolher-card-title">Plataforma segura e responsiva</h3>
+                        <p class="escolher-card-text">Acesso de qualquer dispositivo com segurança.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         PLANOS DE ACESSO
+         ======================================================== -->
+    <section id="planos" data-section-id="planos" class="section">
+        <div class="container">
+            <div class="text-center section-content mb-12">
+                <div class="eyebrow">
+                    <div class="eyebrow-rule"></div>
+                    <span class="eyebrow-text">Investimento</span>
+                    <div class="eyebrow-rule"></div>
+                </div>
+                <h2 class="heading-display heading-lg mb-4">Planos de Acesso</h2>
+                <div class="divider-gold"></div>
+            </div>
+
+            <div class="planos-grid">
+                <!-- COMPETIDOR -->
+                <div class="planos-card" data-card-index="0">
+                    <div class="planos-card-tier">Competidor</div>
+                    <h3 class="planos-card-name">COMPETIDOR</h3>
+                    <span class="badge-gold" style="margin-bottom: 16px; align-self: flex-start;">Acesso Liberado</span>
+                    <p class="planos-card-desc">Plano focado em competições — participe de rankings, desafios e provas oficiais da plataforma, com prêmios e reconhecimento entre candidatos.</p>
+                    <ul class="planos-card-features">
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
+                            Acesso exclusivo às competições da plataforma
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
-                            Suporte especializado
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
+                            Rankings em tempo real
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
-                            Materiais exclusivos
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
+                            Participação em competições oficiais
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
-                            Certificado de conclusão
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
+                            Desafios e prêmios
                         </li>
                     </ul>
-                    <a href="https://aluno.eadlex.com.br/register" class="block w-full px-6 py-3 bg-gradient-to-r from-[#7AD988] to-[#23C13A] text-black rounded-lg hover:shadow-lg hover:shadow-[#7AD988]/50 transition-all font-bold text-center">
+                    <a href="https://aluno.eadlex.com.br/register" class="btn-navy" style="width: 100%; justify-content: center;">
                         Desbloquear Agora
                     </a>
                 </div>
 
-                <!-- Plano PRATA -->
-                <div class="planos-card bg-gradient-to-br from-slate-700/80 to-slate-800/90 p-8 rounded-xl border-2 border-slate-500/50 hover:border-slate-400 transition-all" data-card-index="1">
-                    <h3 class="text-3xl font-bold text-white mb-4">PRATA</h3>
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="text-amber-400">🔓</span>
-                        <span class="text-sm font-bold text-amber-300 uppercase">Acesso Liberado</span>
-                    </div>
-                    <p class="text-gray-300 mb-6 text-sm leading-relaxed">
-                        Plano Prata com acesso aos módulos Bronze + Prata. Inclui recursos avançados e materiais exclusivos para aprofundamento dos estudos. Mini-curso adicional.
-                    </p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
+                <!-- BRONZE -->
+                <div class="planos-card" data-card-index="1">
+                    <div class="planos-card-tier">Bronze</div>
+                    <h3 class="planos-card-name">BRONZE</h3>
+                    <span class="badge-gold" style="margin-bottom: 16px; align-self: flex-start;">Acesso Liberado</span>
+                    <p class="planos-card-desc">Plano Bronze com acesso aos módulos básicos do curso de Direito. Ideal para quem quer começar seus estudos com flexibilidade. Acesso a uma aula bônus.</p>
+                    <ul class="planos-card-features">
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Acesso completo ao curso
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Suporte especializado
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Materiais exclusivos
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Certificado de conclusão
                         </li>
                     </ul>
-                    <a href="https://aluno.eadlex.com.br/register" class="block w-full px-6 py-3 bg-gradient-to-r from-[#7AD988] to-[#23C13A] text-black rounded-lg hover:shadow-lg hover:shadow-[#7AD988]/50 transition-all font-bold text-center">
+                    <a href="https://aluno.eadlex.com.br/register" class="btn-navy" style="width: 100%; justify-content: center;">
                         Desbloquear Agora
                     </a>
                 </div>
 
-                <!-- Plano OURO -->
-                <div class="planos-card bg-gradient-to-br from-amber-700/80 to-yellow-900/90 p-8 rounded-xl border-2 border-amber-500/50 hover:border-amber-400 transition-all transform scale-105" data-card-index="2">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="text-sm font-bold text-amber-300 uppercase">⭐ Mais Popular</span>
-                    </div>
-                    <h3 class="text-3xl font-bold text-white mb-4">OURO</h3>
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="text-amber-400">🔓</span>
-                        <span class="text-sm font-bold text-amber-300 uppercase">Acesso Liberado</span>
-                    </div>
-                    <p class="text-gray-300 mb-6 text-sm leading-relaxed">
-                        Plano Ouro com acesso aos módulos Bronze + Prata + Ouro. Inclui mentoria personalizada e recursos avançados para máxima performance. Sessão em grupo mensal.
-                    </p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
+                <!-- PRATA -->
+                <div class="planos-card" data-card-index="2">
+                    <div class="planos-card-tier">Prata</div>
+                    <h3 class="planos-card-name">PRATA</h3>
+                    <span class="badge-gold" style="margin-bottom: 16px; align-self: flex-start;">Acesso Liberado</span>
+                    <p class="planos-card-desc">Plano Prata com acesso aos módulos Bronze + Prata. Inclui recursos avançados e materiais exclusivos para aprofundamento dos estudos. Mini-curso adicional.</p>
+                    <ul class="planos-card-features">
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Acesso completo ao curso
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Suporte especializado
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Materiais exclusivos
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-amber-400">⭐</span>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Certificado de conclusão
                         </li>
                     </ul>
-                    <a href="https://aluno.eadlex.com.br/register" class="block w-full px-6 py-3 bg-gradient-to-r from-[#7AD988] to-[#23C13A] text-black rounded-lg hover:shadow-lg hover:shadow-[#7AD988]/50 transition-all font-bold text-center">
+                    <a href="https://aluno.eadlex.com.br/register" class="btn-navy" style="width: 100%; justify-content: center;">
                         Desbloquear Agora
                     </a>
                 </div>
 
-                <!-- Plano PREMIUM -->
-                <div class="planos-card bg-gradient-to-br from-purple-900/80 to-indigo-950/90 p-8 rounded-xl border-2 border-purple-500/50 hover:border-purple-400 transition-all" data-card-index="3">
-                    <h3 class="text-3xl font-bold text-white mb-4">PREMIUM</h3>
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="text-orange-400">🔓</span>
-                        <span class="text-sm font-bold text-orange-300 uppercase">Acesso Liberado</span>
-                    </div>
-                    <p class="text-gray-300 mb-6 text-sm leading-relaxed">
-                        Plano Premium com acesso a TODOS os módulos. Inclui mentoria 1:1, materiais exclusivos, suporte 24/7 e todos os recursos disponíveis e acesso antecipado a novos módulos.
-                    </p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-purple-400">💎</span>
+                <!-- OURO (featured) -->
+                <div class="planos-card planos-card-featured" data-card-index="3">
+                    <div class="planos-card-tier">Ouro</div>
+                    <h3 class="planos-card-name">OURO</h3>
+                    <span class="badge-gold" style="margin-bottom: 16px; align-self: flex-start;">Acesso Liberado</span>
+                    <p class="planos-card-desc">Plano Ouro com acesso aos módulos Bronze + Prata + Ouro. Inclui mentoria personalizada e recursos avançados para máxima performance. Sessão em grupo mensal.</p>
+                    <ul class="planos-card-features">
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Acesso completo ao curso
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-purple-400">💎</span>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Suporte especializado
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-purple-400">💎</span>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Materiais exclusivos
                         </li>
-                        <li class="flex items-center gap-2 text-gray-300">
-                            <span class="text-purple-400">💎</span>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon">✓</span>
                             Certificado de conclusão
                         </li>
                     </ul>
-                    <a href="https://aluno.eadlex.com.br/register" class="block w-full px-6 py-3 bg-gradient-to-r from-[#7AD988] to-[#23C13A] text-black rounded-lg hover:shadow-lg hover:shadow-[#7AD988]/50 transition-all font-bold text-center">
+                    <a href="https://aluno.eadlex.com.br/register" class="btn-gold" style="width: 100%; justify-content: center;">
+                        Desbloquear Agora
+                    </a>
+                </div>
+
+                <!-- PREMIUM -->
+                <div class="planos-card" data-card-index="4" style="border-color: var(--color-blue-700);">
+                    <div class="planos-card-tier" style="color: var(--color-blue-500);">Premium</div>
+                    <h3 class="planos-card-name">PREMIUM</h3>
+                    <span class="badge-blue" style="margin-bottom: 16px; align-self: flex-start;">Acesso Liberado</span>
+                    <p class="planos-card-desc">Plano Premium com acesso a TODOS os módulos. Inclui mentoria 1:1, materiais exclusivos, suporte 24/7 e todos os recursos disponíveis e acesso antecipado a novos módulos.</p>
+                    <ul class="planos-card-features">
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon" style="color: var(--color-blue-500);">✓</span>
+                            Acesso completo ao curso
+                        </li>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon" style="color: var(--color-blue-500);">✓</span>
+                            Suporte especializado
+                        </li>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon" style="color: var(--color-blue-500);">✓</span>
+                            Materiais exclusivos
+                        </li>
+                        <li class="planos-card-feature">
+                            <span class="planos-card-feature-icon" style="color: var(--color-blue-500);">✓</span>
+                            Certificado de conclusão
+                        </li>
+                    </ul>
+                    <a href="https://aluno.eadlex.com.br/register" class="btn-navy" style="width: 100%; justify-content: center;">
                         Desbloquear Agora
                     </a>
                 </div>
@@ -930,129 +1763,125 @@
         </div>
     </section>
 
-    <!-- Seção de Registro -->
-    <section id="registro" data-section-id="registro" class="py-20 px-4 bg-slate-800/50">
-        <div class="container mx-auto max-w-2xl">
-            <div class="bg-gradient-to-br from-slate-800 to-slate-900 p-8 md:p-12 rounded-2xl border-2 border-[#7AD988]/30 shadow-2xl">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Crie sua Conta Gratuitamente
-                    </h2>
-                    <p class="text-gray-300 text-lg mb-8">
-                        Comece sua jornada de estudos agora mesmo
-                    </p>
-                </div>
-                <div class="text-center">
-                    <a href="https://aluno.eadlex.com.br/register" class="inline-flex items-center justify-center gap-2 w-full px-8 py-4 bg-gradient-to-r from-[#7AD988] to-[#23C13A] text-black rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-[#7AD988]/50 transition-all transform hover:scale-105">
-                        🚀 Criar Conta Gratuitamente
+    <!-- ========================================================
+         REGISTRO
+         ======================================================== -->
+    <section id="registro" data-section-id="registro" class="section-alt">
+        <div class="container">
+            <div class="section-content">
+                <div class="registro-card">
+                    <div class="eyebrow" style="justify-content: center; margin-bottom: 16px;">
+                        <div class="eyebrow-rule"></div>
+                        <span class="eyebrow-text">Acesso Gratuito</span>
+                        <div class="eyebrow-rule"></div>
+                    </div>
+                    <h2 class="registro-card-title">Crie sua Conta Gratuitamente</h2>
+                    <p class="registro-card-subtitle">Comece sua jornada de estudos agora mesmo</p>
+                    <a href="https://aluno.eadlex.com.br/register" class="btn-gold" style="width: 100%; justify-content: center; font-size: 15px;">
+                        Criar Conta Gratuitamente
                     </a>
-                </div>
-                <div class="mt-6 text-center">
-                    <p class="text-gray-400">
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: var(--color-text-secondary);">
                         Já tem uma conta?
-                        <a href="https://aluno.eadlex.com.br/login" class="text-[#7AD988] hover:text-[#23C13A] font-semibold transition-colors">
-                            Faça login
-                        </a>
+                        <a href="https://aluno.eadlex.com.br/login" class="registro-login-link">Faça login</a>
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Chamada Final -->
-    <section data-section-id="chamada" class="py-20 px-4">
-        <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                Estude com uma plataforma que combina rigor jurídico, tecnologia de ponta e gamificação avançada.
-            </h2>
-            <p class="text-2xl text-gray-300 mb-10">
-                Aprovação e alta performance começam aqui.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://aluno.eadlex.com.br/register" class="px-8 py-4 bg-gradient-to-r from-[#7AD988] to-[#23C13A] text-black rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-[#7AD988]/50 transition-all transform hover:scale-105 flex items-center justify-center gap-2">
-                    🚀 Criar Conta Gratuitamente
-                </a>
-                <button onclick="scrollToSection('como-funciona')" class="px-8 py-4 bg-transparent border-2 border-[#7AD988] text-[#7AD988] rounded-xl font-bold text-lg hover:bg-[#7AD988]/10 transition-all flex items-center justify-center gap-2">
-                    📄 Testar um Simulado Agora
-                </button>
+    <!-- ========================================================
+         CHAMADA FINAL
+         ======================================================== -->
+    <section data-section-id="chamada" class="chamada-section">
+        <div class="container">
+            <div class="chamada-inner section-content">
+                <div class="eyebrow" style="margin-bottom: 20px;">
+                    <div class="eyebrow-rule" style="background-color: rgba(200,154,43,0.6);"></div>
+                    <span class="eyebrow-text" style="color: rgba(200,154,43,0.9);">Alta Performance</span>
+                    <div class="eyebrow-rule" style="background-color: rgba(200,154,43,0.6);"></div>
+                </div>
+                <h2 class="chamada-title">
+                    Estude com uma plataforma que combina rigor jurídico, tecnologia de ponta e experiência premium.
+                </h2>
+                <p class="chamada-subtitle">Aprovação e alta performance começam aqui.</p>
+                <div class="chamada-cta-group">
+                    <a href="https://aluno.eadlex.com.br/register" class="btn-gold" style="font-size: 15px; padding: 0 32px;">
+                        Criar Conta Gratuitamente
+                    </a>
+                    <button onclick="scrollToSection('como-funciona')" class="btn-ghost" style="font-size: 15px; padding: 0 32px; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.07); color: #ffffff;">
+                        Testar um Simulado Agora
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-12 px-4 bg-slate-900 border-t border-blue-500/20">
-        <div class="container mx-auto max-w-6xl">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
-                <div class="flex items-center gap-2">
-                    <img src="/images/auth-logo.png" alt="eadLEX" class="h-8 w-auto" />
-                </div>
-                <div class="flex flex-wrap gap-6 text-gray-400">
-                    <a href="https://aluno.eadlex.com.br/login" class="hover:text-[#7AD988] transition-colors">Entrar</a>
-                    <button onclick="scrollToSection('como-funciona')" class="hover:text-[#7AD988] transition-colors">Como Funciona</button>
-                    <button onclick="scrollToSection('planos')" class="hover:text-[#7AD988] transition-colors">Planos</button>
+    <!-- ========================================================
+         FOOTER
+         ======================================================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="/">
+                    <img src="images/eadlex.png" alt="eadLEX" class="footer-logo" />
+                </a>
+                <div class="footer-links">
+                    <a href="https://aluno.eadlex.com.br/login" class="footer-link">Entrar</a>
+                    <button onclick="scrollToSection('como-funciona')" class="footer-link">Como Funciona</button>
+                    <button onclick="scrollToSection('planos')" class="footer-link">Planos</button>
                 </div>
             </div>
-            <div class="text-center text-gray-500 text-sm">
-                © 2025 eadLEX. Todos os direitos reservados.
-            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-copy">© 2025 eadLEX. Todos os direitos reservados.</div>
         </div>
     </footer>
 
     <script>
-        // Scroll suave
         function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                const section = document.querySelector(`[data-section-id="${sectionId}"]`);
-                if (section) {
-                    section.scrollIntoView({ behavior: 'smooth' });
-                }
+            const elementById = document.getElementById(sectionId);
+            if (elementById) {
+                elementById.scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            const elementByData = document.querySelector('[data-section-id="' + sectionId + '"]');
+            if (elementByData) {
+                elementByData.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
-        // Intersection Observer para animações
-        const visibleSections = new Set();
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const sectionId = entry.target.getAttribute('data-section-id');
-                        if (sectionId) {
-                            visibleSections.add(sectionId);
-                            entry.target.classList.add('section-visible');
-                            
-                            const cards = entry.target.querySelectorAll('[data-card-index]');
-                            cards.forEach((card, index) => {
-                                setTimeout(() => {
-                                    card.classList.add('animate-in');
-                                }, index * 100);
-                            });
-                        }
-                    }
+        const sectionObserver = new IntersectionObserver(
+            function(entries) {
+                entries.forEach(function(entry) {
+                    if (!entry.isIntersecting) { return; }
+
+                    const sectionId = entry.target.getAttribute('data-section-id');
+                    if (!sectionId) { return; }
+
+                    entry.target.classList.add('section-visible');
+
+                    const animatableCards = entry.target.querySelectorAll('[data-card-index]');
+                    animatableCards.forEach(function(card, index) {
+                        setTimeout(function() {
+                            card.classList.add('animate-in');
+                        }, index * 90);
+                    });
                 });
             },
-            {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px',
-            }
+            { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
         );
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Animar hero após delay
-            setTimeout(() => {
-                visibleSections.add('hero');
-                document.querySelector('[data-section-id="hero"]').classList.add('section-visible');
-            }, 300);
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroSection = document.querySelector('[data-section-id="hero"]');
+            if (heroSection) {
+                setTimeout(function() {
+                    heroSection.classList.add('section-visible');
+                }, 200);
+            }
 
-            // Observar seções
-            const sections = document.querySelectorAll('[data-section-id]');
-            sections.forEach((section) => {
-                observer.observe(section);
+            document.querySelectorAll('[data-section-id]').forEach(function(section) {
+                sectionObserver.observe(section);
             });
         });
-
     </script>
 </body>
 </html>
